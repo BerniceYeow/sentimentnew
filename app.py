@@ -86,7 +86,7 @@ def main():
         else:
          st.warning("Not sure! Try to add some more words")
 
-    from stop_words import get_stop_words
+
     if classifier == 'Find new topics automatically':
 
         
