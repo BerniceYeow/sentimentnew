@@ -20,6 +20,7 @@ import streamlit as st
 
 from PIL import Image
 
+preprocessing = malaya.preprocessing.preprocessing()
 
 
 
@@ -119,6 +120,8 @@ def main():
             d1['text'] = ""
             d1['text'] = df[st_ms]
             d1['text'] = d1['text'].astype(str)
+            d1['text'] = d1['text'].apply(preprocessing.process)
+            
             
     
             #INITIALIZE THE TOP2VEC MODEL AND FIT THE TEXT
