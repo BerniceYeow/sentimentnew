@@ -46,7 +46,7 @@ def main():
         return df
     
     st.sidebar.subheader("Choose What Do You Want To Do")
-    classifier = st.sidebar.selectbox(" ", ("Find new topics automatically", "POWER BI Dashboard", "Interact with our chatbot"))
+    classifier = st.sidebar.selectbox(" ", ( "POWER BI Dashboard", "Interact with our chatbot"))
     if classifier == 'POWER BI Dashboard':
         import streamlit.components.v1 as components
         from urllib.request import urlopen
@@ -88,52 +88,6 @@ def main():
          st.warning("Not sure! Try to add some more words")
 
 
-    if classifier == 'Find new topics automatically':
-
-        
-        uploaded_file = st.file_uploader('Upload CSV file to begin', type='csv')
-    
-        #if upload then show left bar
-        if uploaded_file is not None:
-            df = load_data(uploaded_file)
-    
-    
-    
-            if st.sidebar.checkbox("Show raw data", False):
-                st.subheader("Uploaded Data Set")
-                st.write(df)
-    
-    
-
-            st.sidebar.subheader("Text column to analyse")
-            st_ms = st.sidebar.selectbox("Select Text Columns To Analyse", (df.columns.tolist()))
-            
-
-            df_list = list(df)
- 
-
-            import top2vec
-            from top2vec import Top2Vec
-            
-            #INITIALIZE AN EMPTY DATAFRAME, CONVERT THE TEXT INTO STRING AND APPEND INTO THE NEW COLUMN
-            d1 = pd.DataFrame()
-            d1['text'] = ""
-            d1['text'] = df[st_ms]
-            d1['text'] = d1['text'].astype(str)
-            d1['text'] = d1['text'].apply(preprocessing.process)
-            
-            
-    
-            #INITIALIZE THE TOP2VEC MODEL AND FIT THE TEXT
-            #model.build_vocab(df_list, update=False)
-            model = Top2Vec(documents=d1['text'], speed="learn", workers=10)
-            
-            topic_sizes, topic_nums = model.get_topic_sizes()
-            for topic in topic_nums:
-                st.pyplot(model.generate_topic_wordcloud(topic))
-                # Display the generated image:
-
-        
 
 
 
