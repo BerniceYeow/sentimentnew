@@ -3,5 +3,4 @@ malaya==3.8.2
 streamlit==0.64.0
 urllib3==1.25.9
 pickleshare==0.7.5
-top2vec==1.0.10
 torch==1.6.0
